@@ -38,6 +38,7 @@
             if(numRows==1){
                 emailValueStore.set(emailValue);
                 console.log('Dati risultanti:', numRows);
+                emailValueStore.set(emailValue);
                 goto("../home/");
            }else{
                     console.log("numero righe:", numRows);
