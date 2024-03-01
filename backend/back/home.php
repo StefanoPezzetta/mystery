@@ -17,8 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $json_data = file_get_contents("php://input");
     $data = json_decode($json_data, true);
     
-    if ($data !== null && $data["inviaDati"] == 1) {
-        $stmt = $mydb->prepare("SELECT id_utente, nome, cognome, altezza, peso, colore_capelli, colore_occhi, eta, citta, sesso FROM caratteristiche");        
+    if ($data !== null) {
+        $email = $data["email"];
+        $stmt = $mydb->prepare("SELECT id_utente, nome, cognome, altezza, peso, colore_capelli, colore_occhi, eta, citta, sesso FROM caratteristiche where id_utente NOT IN (select id from utente where email = ?)");
+        $stmt->bind_param("s", $email);        
         if ($stmt->execute()) {
             $stmt->bind_result($id_utente, $nome, $cognome, $altezza, $peso, $colore_capelli, $colore_occhi, $eta, $citta, $sesso);
 
