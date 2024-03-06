@@ -2,6 +2,7 @@
     import LinkBtn from "../../lib/LinkBtn.svelte";
     import { emailValueStore } from '../../store.js'; 
     import { goto } from '$app/navigation';
+    import logo from "../../lib/logo.jpg";
 
 
     let emailValue = "";
@@ -75,24 +76,33 @@
         height: 100vh;
     }
     .background {
-        position:absolute;
-        width: 110%;
-        height: 120%;
-        background-image: url('image.png'); /* Adjust the path to your image */
-        background-size: cover;
-        background-position: center;
-        filter: blur(19px); /* Apply the blur effect to the background image */
+        background-color: #4B3849;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Posiziona dietro il contenuto */
     }
     
     .header-text {
-        margin-top: 220px;
+        margin-top: 0px;
         position: fixed;
         top: 50px; /* Adjust the top spacing */
-        left: 50%;
+        left: 29%;
         transform: translateX(-50%);
-        color: #ffffff; /* Text color */
-        font-family: Arial, sans-serif; /* Specify a font family for better readability */
+        color: #FF00E6; /* Text color */
         text-align: center; /* Center the text horizontally */
+        font-size: 45px;
+    }
+    .scritta1{
+        margin-top: 0px;
+        left: 29%;
+    }
+    .scritta1 h2{
+        color: #F837C9; 
+        font-size: 35px;
+
     }
     
     .content {
@@ -146,15 +156,17 @@
     .registrati-link:hover {
         color: #ff00ea;
     }
-    h2{
-        margin-top: 0px;
-    }
+    
+    
     </style>
     
     <body>
         <div class="background"></div>
         <div class="header-text">
-            <h2>ACCEDI</h2>
+            <h1>MYSTERY MATCH</h1>
+        </div>
+        <div class="scritta1">
+            <h2>Accedi ad un account esistente</h2>
         </div>
         <div class="content">
             <input type="text" placeholder="Email" bind:value={emailValue} id="email" />
