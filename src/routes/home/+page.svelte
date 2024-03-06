@@ -143,7 +143,7 @@
 </script>
 
 <main>
-    <h1>Benvenuti nel sito di incontri Mystery Match</h1>
+    <h1>Benvenuto nel sito di incontri Mystery Match</h1>
     <a href="profile" class="btn">Profilo</a>
     <button on:click={() => (showModal = true)} class="btn">Filtri</button>
     <img src="image.png" alt="Logo" class="logo">
@@ -151,7 +151,6 @@
     <a href="home" class="btn">Home</a>
     <body>
         <Modal bind:showModal>
-            <h2 slot="header">Personalizza</h2>
             <div class="modal-content">
                 <form>
                     <div class="form-group">
@@ -179,45 +178,45 @@
         {#each cards as card, index}
         <div class="card">
             <div class="card-content">
-                <div class="card-title">Card {index + 1}</div>
-                <div class="card-description">
+<!--                 <div class="card-title">Profile {index + 1}</div>
+ -->                <div class="card-description">
                     <p><strong>Nome:</strong> {card.nome}</p>
                     <p><strong>Cognome:</strong> {card.cognome}</p>
                     <p>Età: {card.eta}</p>
                     <p><strong>Città:</strong> {card.citta}</p>
                 </div>
-                <button on:click={() => (showModal2 = true, modalIndex = index, modalNome = card.nome , modalCognome = card.cognome, modalAltezza = card.altezza, modalPeso = card.peso, modalColore_capelli = card.colore_capelli, modalColore_occhi = card.colore_occhi, modalEta = card.eta, modalCitta = card.citta, modalSesso = card.sesso)}>Apri Popup</button>
+                <button on:click={() => (showModal2 = true, modalIndex = index, modalNome = card.nome , modalCognome = card.cognome, modalAltezza = card.altezza, modalPeso = card.peso, modalColore_capelli = card.colore_capelli, modalColore_occhi = card.colore_occhi, modalEta = card.eta, modalCitta = card.citta, modalSesso = card.sesso)}>Dettagli</button>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
         {/each}
         <Modal2 bind:showModal2 index={modalIndex} nome={modalNome} cognome={modalCognome} altezza={modalAltezza} peso={modalPeso} colore_capelli={modalColore_capelli} modalColore_occhi={modalColore_occhi} eta={modalEta} citta={modalCitta} sesso={modalSesso}>
-            <h2 slot="header">Personalizza</h2>
             <div>
                 <ul>
-                    <p>{modalNome}</p>
-                    <p>{modalCognome}</p>
-                    <p>{modalAltezza}</p>
-                    <p>{modalPeso}</p>
-                    <p>{modalColore_capelli}</p>
-                    <p>{modalColore_occhi}</p>
-                    <p>{modalEta}</p>
-                    <p>{modalSesso}</p>
+                    <p>Nome: {modalNome}</p>
+                    <p>Cognome: {modalCognome}</p>
+                    <p>Altezza: {modalAltezza}</p>
+                    <p>Peso: {modalPeso}</p>
+                    <p>Colore capelli: {modalColore_capelli}</p>
+                    <p>Colore occhi: {modalColore_occhi}</p>
+                    <p>Età: {modalEta}</p>
+                    <p>Genere: {modalSesso}</p>
                 </ul>
             </div>
-            <button on:click={openModal3} class="neu-btn-chiaro mb-3 sm py-2 px-4 rounded-xl">Conferma</button>
+            <button on:click={openModal3} class="neu-btn-chiaro mb-3 sm py-2 px-4 rounded-xl">Match</button>
         </Modal2>
         <Modal3 bind:showModal3>
-            <h2 slot="header">Personalizza</h2>
             <div>
                 <ul>{@html modal3Content}</ul>
             </div>
-            <button on:click={() => (showModal3 = true)} class="neu-btn-chiaro mb-3 sm py-2 px-4 rounded-xl">Conferma</button>
-        </Modal3>
+<!--             <button on:click={() => (showModal3 = true)} class="neu-btn-chiaro mb-3 sm py-2 px-4 rounded-xl">Conferma</button>
+ -->        </Modal3>
     </body>
 </main>
 
 <style>
-    /* Stili CSS per la card */
     body {
 
         font-family: 'Arial', sans-serif;
@@ -255,6 +254,7 @@
 
     .btn:hover {
         background-color: #b9299a; /* Blu acceso al passaggio del mouse */
+        background-image: url('image.png');
     }
     .btn {
         background-color: #e100ff;
@@ -318,6 +318,12 @@
     width: 50px; /* Adjust the width as needed */
     height: auto; /* Maintain aspect ratio */
 }
-
+.card {
+        background-color: #e100ff;
+        border-radius: 10px; 
+        padding: 20px; 
+        margin: 10px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    }
 
 </style>

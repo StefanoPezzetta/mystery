@@ -41,40 +41,61 @@
   
   <style>
     dialog {
-      max-width: 32em;
-  
-      border: none;
-      padding: 0;
+        max-width: 32em;
+        border: none;
+        padding: 0;
     }
+
     dialog::backdrop {
-      background: rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.3);
     }
+
     dialog > div {
-      padding: 1em;
+        padding: 1em;
+        background-color: #e100ff; /* Background color for the dialog */
+        border-radius: 10px; /* Optional: Add border-radius for rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional: Add box-shadow for a subtle elevation effect */
     }
+
     dialog[open] {
-      animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
+
     @keyframes zoom {
-      from {
-        transform: scale(0.95);
-      }
-      to {
-        transform: scale(1);
-      }
+        from {
+            transform: scale(0.95);
+        }
+        to {
+            transform: scale(1);
+        }
     }
+
     dialog[open]::backdrop {
-      animation: fade 0.2s ease-out;
+        animation: fade 0.2s ease-out;
     }
+
     @keyframes fade {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
+
     button {
-      display: block;
+        display: block;
+        background-color: #bb26b3; /* Slightly darker color for the button */
+        color: #fff; /* Text color for the button */
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px; /* Optional: Add margin to separate the button from the content */
+    }
+
+    button:hover {
+        background-color: #a520a8; /* Darker color on hover */
     }
   </style>

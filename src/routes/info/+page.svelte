@@ -127,7 +127,6 @@ async function sendDataToServer(){
     <br>
     <button on:click={sendDataToServer}><a href="home">Conferma</a></button>
     <a href='registrati' class='back-btn'>Indietro</a>
-    <p>Contenuto dello store: {emailValue}</p>
   </body>
 </main>
 
