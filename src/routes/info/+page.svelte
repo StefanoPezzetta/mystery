@@ -83,6 +83,8 @@ async function sendDataToServer(){
 
 <main>
   <body>
+    <div class="background"></div>
+    <div class="content">
     <p3>Informazioni utente:</p3>
     <p></p>
     <input type="text" placeholder="Nome" bind:value={nomeValue} name="nome" id="nome">
@@ -115,7 +117,7 @@ async function sendDataToServer(){
     
     <button on:click={eliminaInput}>Elimina -</button>
 
-<br>
+    <br>
     {#each inputList as { id, value }}
     <br>
     <input type="text" bind:value={value} key={id} name="interessi" placeholder="..." />
@@ -123,61 +125,100 @@ async function sendDataToServer(){
     <br>
     <br>
     <br>
-    <button on:click={sendDataToServer}>Conferma</button>
-    
-
-    <LinkBtn url='registrati' name='Indietro' />
+    <button on:click={sendDataToServer}><a href="home">Conferma</a></button>
+    <a href='registrati' class='back-btn'>Indietro</a>
     <p>Contenuto dello store: {emailValue}</p>
-
   </body>
 </main>
 
 <style>
-  body {
-    text-align: center;
-    background-color: rgb(175, 175, 175);  
-    margin: 0;
-  }
+body {
+  text-align: center;
+  margin: 0;
+}
 
-  main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
 
-  p3 {
-    margin: 0px 0;
-    color: #ff00ea;
-    font-family: Arial, Verdana, sans-serif;
-    font-size:x-large
-  }
-  p {
-    margin: 10px 0;
-  }
-  p4 {
-    margin: 0px 0;
-    color: #ff00ea;
-    font-size: large;
-    font-family: Arial, Verdana, sans-serif;
+main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-  }
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('image.png'); /* Replace 'image.png' with your image path */
+  background-size: cover;
+  background-position: center;
+  filter: blur(7px); /* Apply a 10px blur effect to the background image */
+}
 
-  input {
-    width: 205px;
-    padding: 10px;
-    border: 1px solid #797979;
-    border-radius: 8px; /* Add rounded corners */
-    margin-bottom: 10px;
-  }
+.content {
+  position: relative; /* Ensure the content stays above the background */
 
-  button {
-    padding: 10px;
-    background-color: #ff00ea;
-    color: #fff;
-    border: none;
-    border-radius: 8px; /* Add rounded corners */
-    cursor: pointer;
-  }
+  z-index: 1; /* Ensure that content is displayed above the blurred background */
+}
+
+p3 {
+  margin: 0px 0;
+  color: #ff00ea;
+  font-family: Arial, Verdana, sans-serif;
+  font-size: x-large;
+}
+
+p {
+  margin: 10px 0;
+}
+
+p4 {
+  margin: 0px 0;
+  color: #ff00ea;
+  font-size: large;
+  font-family: Arial, Verdana, sans-serif;
+}
+
+input {
+  width: 205px;
+  padding: 10px;
+  border: 1px solid #797979;
+  border-radius: 8px; /* Add rounded corners */
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px;
+  background-color: #ff00ea;
+  color: #fff;
+  border: none;
+  border-radius: 8px; /* Add rounded corners */
+  cursor: pointer;
+}
+
+button a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a.back-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ff00ea;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px; /* Add spacing above the button */
+}
+
+a.back-btn:hover {
+  background-color: #ff00ea;
+}
+
 </style>

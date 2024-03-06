@@ -143,66 +143,73 @@
 </script>
 
 <main>
-    <h1>MYSTERY MATCH</h1>
-    <a href="profile" class="btn">profilo</a>
-    <button on:click={() => (showModal = true)}>Apri Popup</button>
-    <a href="home" class="btn">home</a>
+    <h1>Benvenuti nel sito di incontri Mystery Match</h1>
+    <a href="profile" class="btn">Profilo</a>
+    <button on:click={() => (showModal = true)} class="btn">Filtri</button>
+    <img src="image.png" alt="Logo" class="logo">
 
+    <a href="home" class="btn">Home</a>
     <body>
-        <Modal bind:showModal >
+        <Modal bind:showModal>
             <h2 slot="header">Personalizza</h2>
-            <div>
-              <ul>
-                <p>Filtra per:</p>
-                    <label for="citta"> Città:</label><br>
-                    <input type="text" id="citta" name="citta" bind:value={cittaChecked}><br>
-                    <label for="uomo"> Genere</label><br>
-                    <input type="checkbox" id="uomo" name="sesso" value="uomo" bind:checked={uomoChecked} on:change={() => handleCheckboxChange('uomo')}>
-                    <label for="uomo"> Uomo</label><br>
-                    <input type="checkbox" id="donna" name="sesso" value="donna" bind:checked={donnaChecked} on:change={() => handleCheckboxChange('donna')}>
-                    <label for="donna"> Donna</label><br>
-
-              </ul>
+            <div class="modal-content">
+                <form>
+                    <div class="form-group">
+                        <label for="citta">Città:</label>
+                        <input type="text" id="citta" name="citta" bind:value={cittaChecked}>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Genere:
+                            <div>
+                                <input type="checkbox" id="uomo" name="sesso" value="uomo" bind:checked={uomoChecked} on:change={() => handleCheckboxChange('uomo')}>
+                                <label for="uomo">Uomo</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="donna" name="sesso" value="donna" bind:checked={donnaChecked} on:change={() => handleCheckboxChange('donna')}>
+                                <label for="donna">Donna</label>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <button on:click={dataFiltered} class="neu-btn-chiaro">Conferma</button>
+                </form>
             </div>
-            <button on:click={dataFiltered} class="neu-btn-chiaro mb-3 sm py-2 px-4 rounded-xl">Conferma</button>
         </Modal>
         {#each cards as card, index}
-            <div class="card">
-                <div class="card-content">
-                    <div class="card-title">Card {index + 1}</div>
-                    <div class="card-description">
-                        <p><strong>Nome:</strong> {card.nome}</p>
-                        <p><strong>Cognome:</strong> {card.cognome}</p>
-                        <p>Età: {card.eta}</p>
-                        <p><strong>Città:</strong> {card.citta}</p>
-                    </div>
-                    <button on:click={() => (showModal2 = true, modalIndex = index, modalNome = card.nome , modalCognome = card.cognome, modalAltezza = card.altezza, modalPeso = card.peso, modalColore_capelli = card.colore_capelli, modalColore_occhi = card.colore_occhi, modalEta = card.eta, modalCitta = card.citta, modalSesso = card.sesso)}>Apri Popup</button>
+        <div class="card">
+            <div class="card-content">
+                <div class="card-title">Card {index + 1}</div>
+                <div class="card-description">
+                    <p><strong>Nome:</strong> {card.nome}</p>
+                    <p><strong>Cognome:</strong> {card.cognome}</p>
+                    <p>Età: {card.eta}</p>
+                    <p><strong>Città:</strong> {card.citta}</p>
                 </div>
+                <button on:click={() => (showModal2 = true, modalIndex = index, modalNome = card.nome , modalCognome = card.cognome, modalAltezza = card.altezza, modalPeso = card.peso, modalColore_capelli = card.colore_capelli, modalColore_occhi = card.colore_occhi, modalEta = card.eta, modalCitta = card.citta, modalSesso = card.sesso)}>Apri Popup</button>
             </div>
+        </div>
         {/each}
-        <Modal2 bind:showModal2 index={modalIndex} nome = {modalNome} cognome = {modalCognome} altezza = {modalAltezza} peso = {modalPeso} colore_capelli = {modalColore_capelli} modalColore_occhi = {modalColore_occhi} eta = {modalEta} citta = {modalCitta} sesso = {modalSesso} >
+        <Modal2 bind:showModal2 index={modalIndex} nome={modalNome} cognome={modalCognome} altezza={modalAltezza} peso={modalPeso} colore_capelli={modalColore_capelli} modalColore_occhi={modalColore_occhi} eta={modalEta} citta={modalCitta} sesso={modalSesso}>
             <h2 slot="header">Personalizza</h2>
             <div>
-              <ul>
-                <p>{modalNome}</p>
-                <p>{modalCognome}</p>
-                <p>{modalAltezza}</p>
-                <p>{modalPeso}</p>
-                <p>{modalColore_capelli}</p>
-                <p>{modalColore_occhi}</p>
-                <p>{modalEta}</p>
-                <p>{modalSesso}</p>
-
-              </ul>
+                <ul>
+                    <p>{modalNome}</p>
+                    <p>{modalCognome}</p>
+                    <p>{modalAltezza}</p>
+                    <p>{modalPeso}</p>
+                    <p>{modalColore_capelli}</p>
+                    <p>{modalColore_occhi}</p>
+                    <p>{modalEta}</p>
+                    <p>{modalSesso}</p>
+                </ul>
             </div>
             <button on:click={openModal3} class="neu-btn-chiaro mb-3 sm py-2 px-4 rounded-xl">Conferma</button>
         </Modal2>
-        <Modal3 bind:showModal3 >
+        <Modal3 bind:showModal3>
             <h2 slot="header">Personalizza</h2>
             <div>
-              <ul>
-                {@html modal3Content}
-              </ul>
+                <ul>{@html modal3Content}</ul>
             </div>
             <button on:click={() => (showModal3 = true)} class="neu-btn-chiaro mb-3 sm py-2 px-4 rounded-xl">Conferma</button>
         </Modal3>
@@ -212,74 +219,105 @@
 <style>
     /* Stili CSS per la card */
     body {
-    font-family: 'Arial', sans-serif;
-    background-color: #8e44ad; /* Sfondo viola chiaro */
-    color: #fff; /* Testo bianco */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+
+        font-family: 'Arial', sans-serif;
+        background-color: #572853; /* Sfondo viola chiaro */
+        color: #fff; /* Testo bianco */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    main {
+        margin-top: 120px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #fff; /* Testo bianco */
+    }
+
+    .btn {
+        background-color: #ff00ea; /* Viola acceso */
+        color: #fff;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        margin: 5px; /* Aggiungi margine ai bottoni */
+        text-decoration: none; /* Rimuovi sottolineatura */
+    }
+
+    .btn:hover {
+        background-color: #b9299a; /* Blu acceso al passaggio del mouse */
+    }
+    .btn {
+        background-color: #e100ff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 5px;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        background-color: #bb26b3;
+    }
+    .modal-content {
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="checkbox"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    input[type="checkbox"] + label {
+        margin-left: 5px;
+    }
+
+    .neu-btn-chiaro {
+        background-color: #e100ff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .neu-btn-chiaro:hover {
+        background-color: #bb26b3;
+    }
+    .logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
 }
 
-main {
-    text-align: center;
-}
 
-h1 {
-    color: #fff; /* Testo bianco */
-}
-
-.btn {
-    /* Aggiungi stili ai tuoi bottoni se necessario */
-}
-
-/* Stili CSS per le card */
-.card {
-    width: 300px;
-    border: 1px solid #c419c4; /* Bordo delle card fucsia acceso */
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-    background-color: #e719b4; /* Sfondo delle card fucsia acceso */
-    color: #000;
-}
-.card:hover {
-    transform: scale(1.05);
-}
-
-.card-content {
-    padding: 16px;
-}
-
-.card-title {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.card-description {
-    font-size: 1em;
-    color: #fff; /* Testo bianco */
-}
-
-/* Stili CSS per i bottoni */
-button {
-    background-color: #c325e2;
-    color: #fff;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-    margin: 5px; /* Aggiungi margine ai bottoni */
-}
-
-button:hover {
-    background-color: #2980b9;
-}
 </style>

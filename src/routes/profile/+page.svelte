@@ -108,31 +108,93 @@
 
 <main>
     <body>
-        <!-- Utilizza la variabile locale come valore del placeholder -->
-        <input type="text" name="nome" id="nome" placeholder="{nomePlaceholder}" readonly>
-        <br>
-        <input type="text" name="cognome" id="cognome"  placeholder="{cognomePlaceholder}" readonly>
-        <br>
-        <input type="text" name="altezza" id="altezza" bind:value={altezzaPlaceholder} placeholder="{altezzaPlaceholder}">
-        <br>
-        <input type="text" name="peso" id="peso" bind:value={pesoPlaceholder} placeholder="{pesoPlaceholder}">
-        <br>
-        <input type="text" name="colore_capelli" id="colore_capelli" bind:value={colore_capelliPlaceholder} placeholder="{colore_capelliPlaceholder}">
-        <br>
-        <input type="text" name="colore_occhi" id="colore_occhi" placeholder="{colore_occhiPlaceholder}" readonly>
-        <br>
-        <input type="text" name="eta" id="eta" bind:value={etaPlaceholder} placeholder="{etaPlaceholder}">
-        <br>
-        <input type="text" name="citta" id="citta" bind:value={cittaPlaceholder} placeholder="{cittaPlaceholder}">
-        <br>
-        <input type="text" name="sesso" id="sesso" placeholder="{sessoPlaceholder}" readonly>
-        <br>
-        <button on:click={sendModifiche}>Conferma</button>
-
-
-
-
-        <p>contenuto dello store {emailValue}</p>
+        <div class="profile-form">
+            <h2>Il tuo profilo</h2>
+            <input type="text" name="nome" id="nome" placeholder="{nomePlaceholder}" readonly>
+            <input type="text" name="cognome" id="cognome" placeholder="{cognomePlaceholder}" readonly>
+            <input type="text" name="altezza" id="altezza" bind:value={altezzaPlaceholder} placeholder="Altezza (cm)">
+            <input type="text" name="peso" id="peso" bind:value={pesoPlaceholder} placeholder="Peso (kg)">
+            <input type="text" name="colore_capelli" id="colore_capelli" bind:value={colore_capelliPlaceholder} placeholder="Colore dei capelli">
+            <input type="text" name="colore_occhi" id="colore_occhi" placeholder="{colore_occhiPlaceholder}" readonly>
+            <input type="text" name="eta" id="eta" bind:value={etaPlaceholder} placeholder="Età">
+            <input type="text" name="citta" id="citta" bind:value={cittaPlaceholder} placeholder="Città">
+            <input type="text" name="sesso" id="sesso" placeholder="{sessoPlaceholder}" readonly>
+            <button on:click={sendModifiche}>Salva modifiche</button>
+            <a href="home" class="btn back-class">Indietro</a>
+        </div>
     </body>
 </main>
 
+
+<style>
+    /* Stili CSS per il body */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #582b4d;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    /* Stili CSS per il main */
+    main {
+        text-align: center;
+    }
+
+    /* Stili CSS per il profilo utente */
+    .profile-form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 300px;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    input {
+        width: calc(100% - 20px);
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        margin-bottom: 20px;
+        width: calc(100% - 20px);
+        padding: 10px;
+        background-color: #e100ff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #bb26b3;
+    }
+    .back-class {
+        padding: 8px;
+        background-color: #e100ff;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+}
+.back-class:hover{
+    background-color: #bb26b3;
+
+
+}
+
+</style>
