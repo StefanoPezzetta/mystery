@@ -146,14 +146,26 @@
 
     /* Stili CSS per il profilo utente */
     .profile-form {
-        background-color: #fff;
+        background-color: #F837C9;
+        font-weight: 700;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         text-align: center;
         width: 300px;
+        
     }
+    .profile-form input{
+        background-color: #F837C9;
+        border: 1px rgba(248,55,201 0.1);
+        
 
+    }
+    .profile-form input::placeholder {
+        color: #582b4d; /* Colore del placeholder */
+        font-style: italic; /* Stile del testo del placeholder (ad esempio, corsivo) */
+        font-weight: 500;
+    }
     h2 {
         margin-bottom: 20px;
         color: #333;
@@ -172,8 +184,8 @@
         margin-bottom: 20px;
         width: calc(100% - 20px);
         padding: 10px;
-        background-color: #e100ff;
-        color: #fff;
+        color: #F837C9;
+        background-color: #4B3849;
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -184,9 +196,10 @@
         background-color: #bb26b3;
     }
     .back-class {
+        text-decoration: none  ;
         padding: 8px;
-        background-color: #e100ff;
-        color: #fff;
+        color: #F837C9;
+        background-color: #4B3849;
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease;

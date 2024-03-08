@@ -49,51 +49,88 @@ async function sendDataToServer(){
 
 </script>
 
+<body>
+    <div class="title">
+        <h1>MYSTERY MATCH</h1>
+    </div>
+    <h1>Crea un account gratuitamente</h1>
+    <br>
+    <p>Inserisci la tua email:</p>
+    <h2><input type="text" bind:value={emailValue} placeholder="Scrivi qui..." id="email" /></h2>
+    <p1>Dovrai confermare questa Email più tardi.</p1>
+    <p>Inserisci la tua password:</p>
+    <h2><input type="text" bind:value={pwValue} placeholder="Scrivi qui..." id="pw" /></h2>
+    <a href="stats" class="back-btn">Indietro</a>
+    <br>
+    <button class="link-btn" on:click={sendDataToServer}>Avanti</button>
+    <br>
+    
+</body>
+
 <style>
-main {
+body {
+    margin-top: 1px;
+    background-color: #503c4c;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw; /* Use 100vw to make the main element fill the viewport width */
-    height: 100vh; /* Use 100vh to make the main element fill the viewport height */
+    width: 100vw; 
+    height: 100vh; 
     margin: 0;
-    position: relative; /* Set position to relative for positioning the pseudo-element */
+    position: relative;
 }
 
-main::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+.title h1{
+    margin-top: 1px;
 
-    background-image: url('image.png'); /* Add the background image */
-    background-size: cover; /* Adjust background size to cover the entire element */
-    background-position: center; /* Center the background */
-    filter: blur(10px); /* Apply the blur filter */
-    z-index: -1; /* Move the pseudo-element below the main content */
-    width: 110%;
-    height: 120%;
-    background-size: cover;
-    background-position: center;
 
-}
+            color: #ff00e6;
+            position: absolute;
+            font-size: 56px;
+            top: 45px;
+            transform: translateX(-50%);
+        }
 
-h1 {
-    color: #db34bf;
-    margin-top: 0; /* Remove default margin */
-}
+
 
 h2 {
     margin: 10px 0;
+    color: #ff00e6;
+    margin-top:1px;
 }
 
+p {
+    font-size: 25px;
+    margin: 10px 0;
+    color: #ff00e6;
+    margin-top:1px;
+
+}
+p1 {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #ff00e6;
+    margin-top:1px;
+    margin-right: 1%;
+}
+h1 {
+    margin: 10px 0;
+    color: #ff00e6;
+    margin-top: 1px;
+    font-family: 'Jacques Francois'
+
+}
 input {
+    margin-top: 1px;
     width: 250px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px; /* Add rounded corners */
     margin-bottom: 10px; /* Add spacing between inputs */
+    background-color: #503c4c;
+    border-color: #FF00E6;
+
 }
 
 .link-btn, .back-btn {
@@ -103,26 +140,18 @@ input {
     color: #fff;
     text-decoration: none;
     border: none;
-    border-radius: 10px;
+    border-radius: 18px;
     cursor: pointer;
-    filter: blur(0px);
-    margin-top: 10px; /* Add spacing above the button */
 }
 
 .link-btn:hover, .back-btn:hover {
     background-color: #ff00ea;
-}
+    transition: background-color 0.3s ease;
 
+}
 
 </style>
 
-<main>
-    <h1>REGISTRATI</h1>
-    <h2><input type="text" bind:value={emailValue} placeholder="Email" id="email" /></h2>
-    <h2><input type="text" bind:value={pwValue} placeholder="Password" id="pw" /></h2>
-    <button class="link-btn" on:click={sendDataToServer}>Conferma</button>
-    <br>
-    <a href="stats" class="back-btn">Indietro</a>
-</main>
+
 
          

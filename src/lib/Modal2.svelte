@@ -23,7 +23,6 @@
   
   <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
   <dialog
-    class="bg-rosso-chiaro rounded-xl text-white"
     bind:this={dialog}
     on:close={() => (showModal2 = false)}
     on:click|self={() => dialog.close()}
@@ -31,11 +30,9 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div on:click|stopPropagation>
       <slot name="header" />
-      <hr />
       <slot />
-      <hr />
       <!-- svelte-ignore a11y-autofocus -->
-      <button autofocus on:click={() => dialog.close()}>Chiudi</button>
+      <button class = "btnClose" autofocus on:click={() => dialog.close()}>Chiudi</button>
     </div>
   </dialog>
   
@@ -52,13 +49,19 @@
 
     dialog > div {
         padding: 1em;
-        background-color: #e100ff; /* Background color for the dialog */
-        border-radius: 10px; /* Optional: Add border-radius for rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional: Add box-shadow for a subtle elevation effect */
+        background-color: #ff00e6; /* Background color for the dialog */
+        color: #000;
+        text-align: left;
+        font-weight: 600;
+        letter-spacing: 0.5px;
     }
 
     dialog[open] {
         animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btnClose{
+        color: #F837C9;
+        background-color: #4B3849;
     }
 
     @keyframes zoom {
@@ -86,7 +89,6 @@
     button {
         display: block;
         background-color: #bb26b3; /* Slightly darker color for the button */
-        color: #fff; /* Text color for the button */
         padding: 10px;
         border: none;
         border-radius: 5px;
@@ -98,4 +100,6 @@
     button:hover {
         background-color: #a520a8; /* Darker color on hover */
     }
+   
+
   </style>

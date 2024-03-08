@@ -1,15 +1,14 @@
 <script>
-    import logo from "../../lib/logo.jpg";
+    import logo from "../../lib/logo.png";
 </script>
 <body style="background-color: #4B3849;">
     <div class="title">
         <h1>MYSTERY MATCH</h1>
     </div>
 
-    <div class="image">
-        <img src={logo}>
-    </div>
+    <img class="image" src={logo}> 
     
+
     <div class="header-text">
         <h2>Appuntamento al buio?</h2>
         <h2>Trova la tua anima gemella</h2>
@@ -21,12 +20,13 @@
     <div class="btnRegistra">
         <a href="registrati" class="link-btn"><strong>Iscriviti gratuitamente</a>
     </div>
-    <div class="marchio">
+    
+    <footer>
         <p>2024 MysteryMatch®  registered trademark
             <br>
             mysterymatch.info@gmail.com</p>
-    </div>
-    
+    </footer>
+</body>
 
     <style>
         body {
@@ -35,32 +35,44 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            height: 100%;
         }
-        .marchio {
-            margin-top: 250px; /* Puoi regolare la distanza dal top a tuo piacimento */
-            text-align: center; /* Centra il testo orizzontalmente */
-        }
+        body footer{
+            margin-top: 112px;
+            text-align: center;
+            
 
-        .marchio p {
+        }
+        body footer p{
+            color: #F837C9;
+        }
+        .header-text {
+            margin-top: 625px; 
+            text-align: center; 
             color: #F837C9;
             text-shadow: none; 
         }
+
+        
         .image{
-            margin-top: 220px;
+            height: 358.73px;
+            width: 551.42px;
+            z-index: 10;
+            position: absolute;
         }
         .title h1{
             color: #ff00e6;
             position: absolute;
             font-size: 56px;
-            top: 45px; /* Regola la distanza dal top */
-            left: 25%; /* Posiziona al centro orizzontalmente */
+            top: 45px; 
+            left: 25%; 
             transform: translateX(-50%);
         }
         .btnAccedi {
             position: fixed;
             color: #4B3849;
-            top: 50px; /* Regola la distanza dal top */
-            right: 360px; /* Regola la distanza dal right */
+            top: 50px;
+            right: 360px; 
             text-align: center;
         }
 
@@ -140,18 +152,9 @@
             background-color: #ff00ea;
         }
 
-        .header-text {
-            position: fixed;
-            top: 600px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #F837C9;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            text-shadow: 2px 2px 2px black;
-        }
+       
 
-        .header-text h2, .header-text h3 {
+        .header-text h2{
             margin: 0;
         }
 
@@ -159,13 +162,5 @@
             font-size: 24px;
         }
 
-        .header-text h3 {
-            font-size: 20px;
-        }
 
-        .header-text p {
-            font-size: 20px;
-            margin-top: 50px;
-        }
     </style>
-</body>

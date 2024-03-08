@@ -3,6 +3,7 @@
     import Modal from "../../lib/Modal.svelte";
     import Modal2 from "../../lib/Modal2.svelte";
     import Modal3 from "../../lib/Modal3.svelte";
+    import image from "../../lib/download.png";
 
     import { emailValueStore } from '../../store.js'; 
 
@@ -136,19 +137,25 @@
   }
   function openModal3() {
     console.log("generahtml");
-    modal3Content = generateRandomContent(); // Genera il contenuto HTML dinamico
-    showModal3 = true; // Apre il modal3
+    modal3Content = generateRandomContent();
+    showModal3 = true; 
   }
 
 </script>
 
 <main>
-    <h1>Benvenuto nel sito di incontri Mystery Match</h1>
-    <a href="profile" class="btn">Profilo</a>
-    <button on:click={() => (showModal = true)} class="btn">Filtri</button>
-    <img src="image.png" alt="Logo" class="logo">
+    <h1>MYSTERY MATCH</h1>
+    <div class= "string">
+        <div class= "btnContainer">
+            <a href="profile" class="btn">Profilo</a>
+            <button on:click={() => (showModal = true)} class="btn">Filtri</button>
 
-    <a href="home" class="btn">Home</a>
+            <a href="home" class="btn">Home</a>
+
+        </div>
+        
+    </div>
+    
     <body>
         <Modal bind:showModal>
             <div class="modal-content">
@@ -171,21 +178,24 @@
                         </label>
                     </div>
                     
-                    <button on:click={dataFiltered} class="neu-btn-chiaro">Conferma</button>
+                    <button class = "btnConfirm" on:click={dataFiltered} >Conferma</button>
                 </form>
             </div>
         </Modal>
         {#each cards as card, index}
         <div class="card">
             <div class="card-content">
-<!--                 <div class="card-title">Profile {index + 1}</div>
- -->                <div class="card-description">
-                    <p><strong>Nome:</strong> {card.nome}</p>
-                    <p><strong>Cognome:</strong> {card.cognome}</p>
-                    <p>Età: {card.eta}</p>
-                    <p><strong>Città:</strong> {card.citta}</p>
+              <div class="card-description">
+                <img class = "image" src={image} alt="image">
+                    <p><strong>Nome:</strong> {card.nome}
+                        <br>
+                    <strong>Cognome:</strong> {card.cognome}
+                    <br>
+                    <strong>Età:</strong> {card.eta}
+                    <br>
+                    <strong>Città:</strong> {card.citta}</p>
                 </div>
-                <button on:click={() => (showModal2 = true, modalIndex = index, modalNome = card.nome , modalCognome = card.cognome, modalAltezza = card.altezza, modalPeso = card.peso, modalColore_capelli = card.colore_capelli, modalColore_occhi = card.colore_occhi, modalEta = card.eta, modalCitta = card.citta, modalSesso = card.sesso)}>Dettagli</button>
+                <button class = "detail" on:click={() => (showModal2 = true, modalIndex = index, modalNome = card.nome , modalCognome = card.cognome, modalAltezza = card.altezza, modalPeso = card.peso, modalColore_capelli = card.colore_capelli, modalColore_occhi = card.colore_occhi, modalEta = card.eta, modalCitta = card.citta, modalSesso = card.sesso)}>DETTAGLI</button>
             </div>
         </div>
         <br>
@@ -205,7 +215,7 @@
                     <p>Genere: {modalSesso}</p>
                 </ul>
             </div>
-            <button on:click={openModal3} class="neu-btn-chiaro mb-3 sm py-2 px-4 rounded-xl">Match</button>
+            <button on:click={openModal3} class="btnMatch">Match</button>
         </Modal2>
         <Modal3 bind:showModal3>
             <div>
@@ -220,8 +230,8 @@
     body {
 
         font-family: 'Arial', sans-serif;
-        background-color: #572853; /* Sfondo viola chiaro */
-        color: #fff; /* Testo bianco */
+        background-color: #4B3849;
+        color: #fff;
         margin: 0;
         padding: 0;
         display: flex;
@@ -229,36 +239,57 @@
         align-items: center;
         justify-content: center;
         min-height: 100vh;
+        display: flex;
     }
 
     main {
         margin-top: 120px;
         text-align: center;
     }
+    .btnContainer{
+        margin-left: 690px;
+    }
+    .string{
+        display: flex;
+        align-items: center;
+        z-index: 1000;
+        width: 1919px;
+        height: 60px;
+        background-color: #c711b53a;
+    }
 
     h1 {
-        color: #fff; /* Testo bianco */
+        color: #ff00e6;
+        font-size: 60px;
+        font-family: 'Jacques Francois';
+        padding: 0%;
+        border: 0;
+        margin: 0;
+        
+
+        
     }
 
     .btn {
-        background-color: #ff00ea; /* Viola acceso */
-        color: #fff;
-        padding: 8px 16px;
+        background-color: #ff00ea;
+        color: #4B3849;
+        font-weight: 700;
+        padding: 10px 20px;
         border: none;
-        border-radius: 4px;
         cursor: pointer;
         transition: background-color 0.3s ease-in-out;
-        margin: 5px; /* Aggiungi margine ai bottoni */
-        text-decoration: none; /* Rimuovi sottolineatura */
+        margin: 5px;
+        text-decoration: none;
     }
-
     .btn:hover {
-        background-color: #b9299a; /* Blu acceso al passaggio del mouse */
+        background-color: #b9299a;
         background-image: url('image.png');
+
     }
     .btn {
         background-color: #e100ff;
-        color: #fff;
+        color: #4B3849;
+        font-weight: 700;
         padding: 10px 20px;
         border: none;
         border-radius: 5px;
@@ -298,9 +329,9 @@
         margin-left: 5px;
     }
 
-    .neu-btn-chiaro {
-        background-color: #e100ff;
-        color: #fff;
+    .btnConfirm {
+        color: #F837C9;
+        background-color: #4B3849;
         padding: 10px 20px;
         border: none;
         border-radius: 5px;
@@ -308,22 +339,36 @@
         transition: background-color 0.3s ease;
     }
 
-    .neu-btn-chiaro:hover {
-        background-color: #bb26b3;
+    .btnMatch{
+        color: #F837C9;
+        background-color: #4B3849;
     }
-    .logo {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 50px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-}
 .card {
-        background-color: #e100ff;
+        background-color: #F837C9;
         border-radius: 10px; 
         padding: 20px; 
         margin: 10px; 
+        width: 500px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    }
+    .card .card-content .card-description{
+        color: #4B3849;
+        font-weight: 700;
+    }
+    .detail{
+        font-family: 'Jacques Francois';
+        color: #F837C9;
+        background-color: #4B3849;
+        letter-spacing: 1px;
+        height: 45px;
+        width: 90px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .image{
+        width: 40px;
+        height: 40px;
     }
 
 </style>

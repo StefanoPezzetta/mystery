@@ -2,7 +2,7 @@
     import LinkBtn from "../../lib/LinkBtn.svelte";
     import { emailValueStore } from '../../store.js'; 
     import { goto } from '$app/navigation';
-    import logo from "../../lib/logo.jpg";
+    import logo from "../../lib/logo.png";
 
 
     let emailValue = "";
@@ -110,6 +110,10 @@
         z-index: 1; /* Ensure content stays above the blurred background */
         text-align: center;
     }
+    .content p{
+        color: #f041e1;
+    }
+
     
     input {
         width: 250px;
@@ -117,6 +121,8 @@
         border: 1px solid #464646;
         border-radius: 12px;
         margin-bottom: 10px; /* Add spacing between inputs */
+        background-color: #4B3849;
+        border-color: #FF00E6;
     }
     
     button {
@@ -156,6 +162,7 @@
     .registrati-link:hover {
         color: #ff00ea;
     }
+
     
     
     </style>

@@ -31,11 +31,9 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div on:click|stopPropagation>
       <slot name="header" />
-      <hr />
       <slot />
-      <hr />
       <!-- svelte-ignore a11y-autofocus -->
-      <button autofocus on:click={() => dialog.close()}>Chiudi</button>
+      <button class="btnClose" autofocus on:click={() => dialog.close()}>Chiudi</button>
     </div>
   </dialog>
   
@@ -50,10 +48,18 @@
       background: rgba(0, 0, 0, 0.3);
     }
     dialog > div {
-      padding: 1em;
-    }
+        padding: 1em;
+        background-color: #ff00e6; /* Background color for the dialog */
+        color: #000;
+        text-align: left;
+        font-weight: 600;
+        letter-spacing: 0.5px;    }
     dialog[open] {
       animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btnClose{
+        color: #F837C9;
+        background-color: #4B3849;
     }
     @keyframes zoom {
       from {
