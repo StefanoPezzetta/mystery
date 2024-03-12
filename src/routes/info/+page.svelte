@@ -171,6 +171,8 @@ input {
   border-radius: 10px;
   margin-bottom: 10px;
   background-color: #503c4c;
+  color :#fff;
+
 
 }
 

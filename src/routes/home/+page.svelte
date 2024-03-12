@@ -3,7 +3,6 @@
     import Modal from "../../lib/Modal.svelte";
     import Modal2 from "../../lib/Modal2.svelte";
     import Modal3 from "../../lib/Modal3.svelte";
-    import image from "../../lib/download.png";
 
     import { store } from '../../store.js'; 
 
@@ -186,7 +185,11 @@
     modal3Content = generateRandomContent();
     showModal3 = true; 
   }
-  
+  function deleteStoreData(){
+    store.set({
+        emailValueStore: "",
+        pwValueStore: ""
+    });  }
 
 </script>
 
@@ -197,7 +200,7 @@
             <a href="profile" class="btn">Profilo</a>
             <button on:click={() => (showModal = true)} class="btn">Filtri</button>
 
-            <a href="home" class="btn">Home</a>
+            <a href="login" class="btn" on:click={deleteStoreData}>Logout</a>
 
         </div>
         
