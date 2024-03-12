@@ -1,6 +1,6 @@
 <script>
     import LinkBtn from "../../lib/LinkBtn.svelte";
-    import { emailValueStore } from '../../store.js'; 
+    import { store } from '../../store.js'; 
     import { goto } from '$app/navigation';
     import logo from "../../lib/logo.png";
 
@@ -37,10 +37,12 @@
 
         if (responseData !== null) {
             if(numRows==1){
-                emailValueStore.set(emailValue);
                 console.log('Dati risultanti:', numRows);
-                emailValueStore.set(emailValue);
-                goto("../home/");
+                store.set({
+                    emailValueStore: emailValue,
+                    pwValueStore: pwValue
+                });
+            goto("../home/");
            }else{
                     console.log("numero righe:", numRows);
                     alert("nessun utente trovato");
@@ -86,36 +88,42 @@
     }
     
     .header-text {
-        margin-top: 0px;
-        position: fixed;
-        top: 50px; /* Adjust the top spacing */
-        left: 29%;
-        transform: translateX(-50%);
-        color: #FF00E6; /* Text color */
-        text-align: center; /* Center the text horizontally */
-        font-size: 45px;
-    }
+    position: fixed;
+    top: 0%;
+left: 50%;
+    transform: translateX(-50%);
+    color: #FF00E6; /* Text color */
+    text-align: center; /* Center the text horizontally */
+    font-size: 40px;
+}
     .scritta1{
-        margin-top: 0px;
-        left: 29%;
-    }
-    .scritta1 h2{
+        margin-top: 20px;
         color: #F837C9; 
         font-size: 35px;
-
     }
     
     .content {
         position: relative;
-        z-index: 1; /* Ensure content stays above the blurred background */
+        border: 4px solid #FF00E6; /* Rendi il bordo più spesso */
+        border-radius: 12px; /* Aggiunge bordi arrotondati */
+        padding: 20px; /* Aggiunge spazio interno al contenitore */
         text-align: center;
+        max-width: 500px; /* Imposta una larghezza massima per il contenitore */
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.7); /* Ombra uniforme su tutti i lati */
+        transition: transform 0.3s ease; /* Aggiungi transizione al cambio di scala */
     }
+    
+    .content:hover {
+        transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
+    }
+    
     .content p{
         color: #f041e1;
     }
 
     
     input {
+        color: #fff;
         width: 250px;
         padding: 10px;
         border: 1px solid #464646;
@@ -123,11 +131,16 @@
         margin-bottom: 10px; /* Add spacing between inputs */
         background-color: #4B3849;
         border-color: #FF00E6;
+        transition: border-color 0.3s ease; /* Aggiungi transizione al cambio di colore del bordo */
+    }
+    
+    input:focus {
+        border-color: #ff00ea; /* Cambia colore del bordo quando l'input ottiene il focus */
     }
     
     button {
         padding: 10px 20px;
-        background-color: #f041e1;
+        background-color: #ff00ea;
         color: #fff;
         border: none;
         border-radius: 10px;
@@ -143,7 +156,7 @@
         margin-top: 10px;
         display: inline-block;
         padding: 8px 25px;
-        background-color: #f041e1;
+        background-color: #ff00ea;
         color: #fff;
         text-decoration: none;
         border-radius: 10px;
@@ -160,30 +173,39 @@
     }
     
     .registrati-link:hover {
-        color: #ff00ea;
+        background-color: #ff00ea;
+    }
+    h1{
+        align-content: center;
+        font-family: 'Jacques Francois'
     }
 
-    
-    
-    </style>
-    
-    <body>
-        <div class="background"></div>
-        <div class="header-text">
-            <h1>MYSTERY MATCH</h1>
-        </div>
+
+
+
+
+
+</style>
+
+<body>
+    <div class="background"></div>
+    <div class="header-text">
+        <h1>MYSTERY MATCH</h1>
+    </div>
+    <div class="content">
         <div class="scritta1">
-            <h2>Accedi ad un account esistente</h2>
+            <h2>Accedi</h2>
         </div>
-        <div class="content">
-            <input type="text" placeholder="Email" bind:value={emailValue} id="email" />
-            <br>
-            <input type="text" placeholder="Password" bind:value={pwValue} id="pw" />
-            <br>
-            <button on:click={sendDataToServer}>Conferma</button>
-            <br>
+        <input type="text" placeholder="Email" bind:value={emailValue} id="email" />
+        <br>
+        <input type="text" placeholder="Password" bind:value={pwValue} id="pw" />
+        <br>
+        <div class="button-container">
             <a href="stats" class="back-btn">Indietro</a>
-    
-            <p>Non hai un account? Clicca <a href="registrati" class="registrati-link">qui</a> per registrarti gratuitamente.</p>
+            <button on:click={sendDataToServer}>Conferma</button>
         </div>
-    </body>
+        
+        
+        <p>Non hai un account? Clicca <a href="registrati" class="registrati-link">qui</a> per registrarti gratuitamente.</p>
+    </div>
+</body>

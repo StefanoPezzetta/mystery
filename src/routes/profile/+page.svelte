@@ -1,7 +1,7 @@
 <script>
      
  
-    import { emailValueStore } from '../../store.js';
+    import { store } from '../../store.js';
     import { onMount } from 'svelte'; 
     let emailValue;
     let data;
@@ -15,7 +15,7 @@
     let cittaPlaceholder;
     let sessoPlaceholder;
 
-    $: emailValue = $emailValueStore;
+    $: emailValue = $store.emailValueStore;
 
     async function sendDataToServer() {
         const dataToSend = {

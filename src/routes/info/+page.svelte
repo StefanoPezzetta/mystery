@@ -1,9 +1,9 @@
 <script>
     import LinkBtn from "../../lib/LinkBtn.svelte";
     import { goto } from '$app/navigation';
-    import { emailValueStore } from '../../store.js'; 
-      let emailValue;
-      $: emailValue = $emailValueStore;
+    import { store } from '../../store.js'; 
+      $: emailValue = $store.emailValueStore;
+      $: pwValue = $store.pwValueStore;
       let nomeValue = "";
       let cognomeValue = "";
       let sessoValue = "";
@@ -35,6 +35,7 @@
 
       const dataToSend = {
               email: emailValue,
+              pw: pwValue,
               nome: nomeValue,
               cognome: cognomeValue,
               sesso : sessoValue,

@@ -5,11 +5,11 @@
     import Modal3 from "../../lib/Modal3.svelte";
     import image from "../../lib/download.png";
 
-    import { emailValueStore } from '../../store.js'; 
+    import { store } from '../../store.js'; 
 
 
     let emailValue;
-    $: emailValue = $emailValueStore;
+    $: emailValue = $store.emailValueStore;
     let showModal = false;
     let showModal2 = false;
     let showModal3 = false;
@@ -27,22 +27,29 @@
     let cittaChecked = "";
     let uomoChecked = false;
     let donnaChecked = false;
+    let altezzaValue = null;
+    let pesoValue = null;
+    let colore_capelliValue = null;
+    let colore_occhiValue = null;
+    let sessoValue = null;
 
-    function handleCheckboxChange(sex) {
+
+
+
+    /* function handleCheckboxChange(sex) {
         if (sex === 'uomo') {
-            uomoChecked = true;
-            donnaChecked = false;
-        } else if (sex === 'donna') {
-            uomoChecked = false;
-            donnaChecked = true;
-        }
+      uomoChecked = !uomoChecked;
+    } else if (sex === 'donna') {
+      donnaChecked = !donnaChecked;
     }
+  } */
+
 
 
     let cards = [];
     
 
-    async function sendDataToServer() {
+    async function reciveDataFromServer() {
         const dataToSend = {
             email: emailValue,
          };
@@ -75,8 +82,47 @@
         }
     }
 
-    onMount(() => {
-        sendDataToServer();
+    async function reciveCaratteristicheFromServer(id_utente) {
+        const dataToSend = {
+            id_utente: id_utente,
+         };
+
+        try {
+            const response = await fetch('http://localhost/backend/back/details.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataToSend),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Errore durante la richiesta al server. Codice di stato: ${response.status}`);
+            }
+
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                const responseData1 = await response.json();
+                console.log('Dati ricevuti dal server:', responseData1);
+                altezzaValue = responseData1[0].altezza;
+                pesoValue = responseData1[0].peso;
+                colore_capelliValue = responseData1[0].colore_capelli;
+                colore_occhiValue = responseData1[0].colore_occhi;
+                sessoValue = responseData1[0].sesso;
+
+                console.log('Valori assegnati:', altezzaValue, pesoValue, colore_capelliValue, colore_occhiValue, sessoValue);
+
+            } else {
+                alert("errore");
+                console.log('Nessun dato risultante.');
+            }
+        } catch (error) {
+            console.error('Errore nella fetch:', error.message);
+        }
+    }
+
+    onMount(async () => {
+        await reciveDataFromServer();
     });
    
     async function dataFiltered() {
@@ -140,6 +186,7 @@
     modal3Content = generateRandomContent();
     showModal3 = true; 
   }
+  
 
 </script>
 
@@ -157,7 +204,8 @@
     </div>
     
     <body>
-        <Modal bind:showModal>
+<!--         filtraggio
+ -->       <Modal bind:showModal>
             <div class="modal-content">
                 <form>
                     <div class="form-group">
@@ -168,11 +216,11 @@
                         <label>
                             Genere:
                             <div>
-                                <input type="checkbox" id="uomo" name="sesso" value="uomo" bind:checked={uomoChecked} on:change={() => handleCheckboxChange('uomo')}>
+                                <input type="checkbox" id="uomo" name="sesso" value="uomo" bind:checked={uomoChecked}>
                                 <label for="uomo">Uomo</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="donna" name="sesso" value="donna" bind:checked={donnaChecked} on:change={() => handleCheckboxChange('donna')}>
+                                <input type="checkbox" id="donna" name="sesso" value="donna" bind:checked={donnaChecked}>
                                 <label for="donna">Donna</label>
                             </div>
                         </label>
@@ -186,8 +234,8 @@
         <div class="card">
             <div class="card-content">
               <div class="card-description">
-                <img class = "image" src={image} alt="image">
-                    <p><strong>Nome:</strong> {card.nome}
+<!--                 <img class = "image" src={image} alt="image">
+ -->                    <p><strong>Nome:</strong> {card.nome}
                         <br>
                     <strong>Cognome:</strong> {card.cognome}
                     <br>
@@ -195,14 +243,33 @@
                     <br>
                     <strong>Città:</strong> {card.citta}</p>
                 </div>
-                <button class = "detail" on:click={() => (showModal2 = true, modalIndex = index, modalNome = card.nome , modalCognome = card.cognome, modalAltezza = card.altezza, modalPeso = card.peso, modalColore_capelli = card.colore_capelli, modalColore_occhi = card.colore_occhi, modalEta = card.eta, modalCitta = card.citta, modalSesso = card.sesso)}>DETTAGLI</button>
-            </div>
+                <button class="detail" on:click={async () => {
+                    try {
+                        await reciveCaratteristicheFromServer(card.id_utente);
+                        showModal2 = true;
+                        modalIndex = index;
+                        modalNome = card.nome;
+                        modalCognome = card.cognome;
+                        modalAltezza = altezzaValue;
+                        modalPeso = pesoValue;
+                        modalColore_capelli = colore_capelliValue;
+                        modalColore_occhi = colore_occhiValue;
+                        modalEta = card.eta;
+                        modalSesso = sessoValue;
+                        modalCitta = card.citta;
+                    } catch (error) {
+                        console.error('Errore durante la ricezione delle caratteristiche:', error);
+                    }
+                }}>DETTAGLI</button>   
+             </div>
         </div>
         <br>
         <br>
         <br>
         {/each}
-        <Modal2 bind:showModal2 index={modalIndex} nome={modalNome} cognome={modalCognome} altezza={modalAltezza} peso={modalPeso} colore_capelli={modalColore_capelli} modalColore_occhi={modalColore_occhi} eta={modalEta} citta={modalCitta} sesso={modalSesso}>
+
+        <!-- Caratteristiche -->
+        <Modal2 bind:showModal2 index={modalIndex} nome={modalNome} cognome={modalCognome} altezza = {modalAltezza} peso = {modalPeso} colore_capelli = {modalColore_capelli} colore_occhi = {modalColore_occhi} eta={modalEta} sesso = {modalSesso} citta={modalCitta}>
             <div>
                 <ul>
                     <p>Nome: {modalNome}</p>
@@ -213,6 +280,7 @@
                     <p>Colore occhi: {modalColore_occhi}</p>
                     <p>Età: {modalEta}</p>
                     <p>Genere: {modalSesso}</p>
+                    <p>Città: {modalCitta}</p>
                 </ul>
             </div>
             <button on:click={openModal3} class="btnMatch">Match</button>
