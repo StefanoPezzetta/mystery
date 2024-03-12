@@ -18,19 +18,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode($json_data, true);
     
     if ($data !== null) {
-        $email = $data["email"];
-        $stmt = $mydb->prepare("SELECT id_utente, nome, cognome, eta, citta FROM caratteristiche where id_utente NOT IN (select id from utente where email = ?)");
-        $stmt->bind_param("s", $email);        
+        $id = $data["id_utente"];
+        $stmt = $mydb->prepare("SELECT altezza, peso, colore_capelli, colore_occhi, sesso FROM caratteristiche where id_utente  = ?");
+        $stmt->bind_param("i", $id);        
         if ($stmt->execute()) {
-            $stmt->bind_result($id_utente, $nome, $cognome, $eta, $citta);
+            $stmt->bind_result($altezza, $peso, $colore_capelli, $colore_occhi, $sesso);
 
             while ($stmt->fetch()) {
                 $result[] = [
-                    "id_utente" => $id_utente,
-                    "nome" => $nome,
-                    "cognome" => $cognome,
-                    "eta" => $eta,
-                    "citta" => $citta,
+                    "altezza" => $altezza,
+                    "peso" => $peso,
+                    "colore_capelli" => $colore_capelli,
+                    "colore_occhi" => $colore_occhi,
+                    "sesso" => $sesso
                 ];
             }
             

@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($data !== null) {
         // Ora $data contiene i dati inviati
         $email = $data['email'];
+        $pw = $data['pw'];
         $nome = $data['nome'];
         $cognome = $data['cognome'];
         $sesso = $data['sesso'];
@@ -35,6 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $coloreOcchi = $data['coloreOcchi'];
         $città = $data['città'];
 
+        $hash = password_hash($pw, PASSWORD_DEFAULT);
+        $stmt0 = $mydb->prepare("INSERT INTO utente (email, pw) VALUES (?, ?)");
+        $stmt0->bind_param("ss", $email, $hash);
+        $stmt0->execute();
+        $stmt0->close();
+
         // Eseguire la query SELECT per ottenere l'ID dell'utente
         $stmt = $mydb->prepare("SELECT id FROM utente WHERE email = ?");
         $stmt->bind_param("s", $email);
@@ -42,12 +49,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_result($id);
         $stmt->fetch();
         $stmt->close(); 
- 
+  
         $stmt1 = $mydb->prepare("INSERT INTO caratteristiche (id_utente, nome, cognome, altezza, peso, colore_capelli, colore_occhi, eta, citta, sesso) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt1->bind_param("issiississ", $id, $nome, $cognome, $altezza, $peso, $coloreCapelli, $coloreOcchi, $età, $città, $sesso);
         $stmt1->execute();
-        $stmt1->close(); 
+        $stmt1->close();
     }
+
+        
 }
+
 ?>
 
